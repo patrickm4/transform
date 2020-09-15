@@ -9,39 +9,55 @@
   <meta name="author" content="Patrickm4">
 
   <style>
-    #shapes{
+    .shapes{
+      top:50px;
+      left:250px;
       height: 250px;
       width: 250px;
       border: 5px solid black;
-      transition: all 1s ease;
+      transition: transform 2s ease, border-radius 0.5s ease;
+    }
+    #container{
+      position:absolute;
+      top: 50%;
+      width:100vw;
+      display:flex;
+      justify-content: center;
+      transform: translateY(-50%);
     }
   </style>
 
 </head>
 
 <body>
-  <script>
-    let shape = document.getElementById('shapes');
-    let degree = 0;
-    let timeId;
 
-    console.log("check shape", shape);
-
-    function rotate() {
-      degree += 90;
-      shape.style.transform = `rotate(${degree}deg)`;
-      if(degree === 360) degree = 0;
-    }
-
-    function start() {
-      console.log("yeet")
-      timeId = setTimeout(rotate(), 1000)
-    }
-
-    start()
-  </script>
-
-  <div id="shapes">
+  <div id="container">
+    <div class="shapes">
+    </div>
   </div>
+
+  <script>
+  let shape = document.getElementsByClassName('shapes')[0];
+  let degree = 0;
+  let timeId, isCircle = false;
+
+  function rotate() {
+    degree += 90;
+    shape.style.transform = `rotate(${degree}deg)`;
+    if(isCircle){
+      shape.style.borderRadius = '0%'
+      isCircle = false
+    } else {
+      shape.style.borderRadius = '50%'
+      isCircle = true
+    };
+  }
+
+  function start() {
+    timeId = window.setInterval(rotate, 2000);
+  }
+
+  start()
+  </script>
 </body>
 </html>
