@@ -4,17 +4,44 @@
 <head>
   <meta charset="utf-8">
 
-  <title>The HTML5 Herald</title>
-  <meta name="description" content="The HTML5 Herald">
-  <meta name="author" content="SitePoint">
+  <title>Transform</title>
+  <meta name="description" content="Transform">
+  <meta name="author" content="Patrickm4">
 
-  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <style>
+    #shapes{
+      height: 250px;
+      width: 250px;
+      border: 5px solid black;
+      transition: all 1s ease;
+    }
+  </style>
 
 </head>
 
 <body>
   <script>
-    
+    let shape = document.getElementById('shapes');
+    let degree = 0;
+    let timeId;
+
+    console.log("check shape", shape);
+
+    function rotate() {
+      degree += 90;
+      shape.style.transform = `rotate(${degree}deg)`;
+      if(degree === 360) degree = 0;
+    }
+
+    function start() {
+      console.log("yeet")
+      timeId = setTimeout(rotate(), 1000)
+    }
+
+    start()
   </script>
+
+  <div id="shapes">
+  </div>
 </body>
 </html>
