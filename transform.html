@@ -42,6 +42,7 @@
   let timeId, isCircle = false;
 
   function rotate() {
+
     degree += 90;
     shape.style.transform = `rotate(${degree}deg)`;
     if(isCircle){
@@ -57,7 +58,13 @@
     timeId = window.setInterval(rotate, 2000);
   }
 
-  start()
+  document.addEventListener("visibilitychange", function () {
+    if(document.hidden){
+      clearInterval(timeId)
+    } else {
+      start()
+    }
+  })
   </script>
 </body>
 </html>
