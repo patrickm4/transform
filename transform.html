@@ -10,8 +10,6 @@
 
   <style>
     .shapes{
-      top:50px;
-      left:250px;
       height: 250px;
       width: 250px;
       border: 5px solid black;
@@ -22,9 +20,41 @@
       top: 50%;
       width:100vw;
       display:flex;
-      justify-content: center;
+      justify-content: space-around;
       transform: translateY(-50%);
     }
+    .testShape{
+      /* height: 250px;
+      width: 250px;
+      border: 5px solid black;
+      transform: skew(20deg);
+      overflow: hidden;
+      position: relative;
+      margin: 0 0 0 -20px; */
+
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 100px 100px 100px;
+      border-color: transparent transparent #007bff transparent;
+      outline: 1px dashed red;
+    }
+    .rot{
+      transform: rotate(34deg);
+    }
+
+    path {
+      d: path("M150, 10 L40, 200 L260, 200 L260, 200Z");
+      /* fill: #4c6edb; */
+      fill: #fff;
+      stroke: black;
+      transition: all 0.35s ease;
+    }
+
+    /* path:active {
+      d: path("M220, 10 L40, 10 L40, 220 L220, 220Z");
+      fill: #6e40aa;
+    } */
   </style>
 
 </head>
@@ -34,10 +64,20 @@
   <div id="container">
     <div class="shapes">
     </div>
+    <div class="testShape">
+    </div>
+    <svg height="250" width="50" style="overflow:visible;">
+      <polygon class="rot" points="150,30 250,150 50,150" style="fill:transparent;stroke:black;stroke-width:3" />
+    </svg>
+    <svg class="svgs" height="220" width="300" style="overflow:visible;">
+      <path class="paths"/>
+    </svg>
   </div>
 
   <script>
   let shape = document.getElementsByClassName('shapes')[0];
+  let paths = document.getElementsByClassName('paths')[0];
+  let svgs = document.getElementsByClassName('svgs')[0];
   let degree = 0;
   let timeId, isCircle = false;
 
@@ -45,11 +85,16 @@
 
     degree += 90;
     shape.style.transform = `rotate(${degree}deg)`;
+    svgs.style.transform = `rotate(${degree}deg)`;
     if(isCircle){
-      shape.style.borderRadius = '0%'
-      isCircle = false
+      shape.style.borderRadius = '0%';
+      paths.style.d = 'path("M220, 10 L40, 10 L40, 220 L220, 220Z")';
+      paths.style.fill = '#6e40aa';
+      isCircle = false;
     } else {
       shape.style.borderRadius = '50%'
+      paths.style.d = 'path("M150, 10 L40, 200 L260, 200 L260, 200Z")';
+      paths.style.fill = '#fff';
       isCircle = true
     };
   }
